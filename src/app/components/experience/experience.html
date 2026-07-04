@@ -1,21 +1,45 @@
-<section id="experience" class="max-w-4xl mx-auto px-6 py-16">
-  <h2 class="text-3xl font-bold text-slate-900 mb-10">Experience</h2>
+<section class="max-w-4xl mx-auto px-6 py-16">
+  <h2 class="text-2xl font-semibold tracking-tight text-slate-900 dark:text-slate-100 mb-10">
+    Experience
+  </h2>
   <ul class="space-y-10">
     @for (entry of experiences; track entry.id) {
-      <li class="border-l-2 border-slate-200 pl-6">
+      <li appScrollReveal class="border-l-2 border-slate-200 dark:border-cyan-500/30 pl-6">
         <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1">
           <div>
-            <h3 class="text-lg font-semibold text-slate-900">{{ entry.role }}</h3>
-            <p class="text-slate-600">{{ entry.company }}</p>
+            <h3 class="text-base font-semibold text-slate-900 dark:text-slate-100">{{ entry.role }}</h3>
+            <p class="text-sm text-slate-500 dark:text-slate-400">{{ entry.company }}</p>
           </div>
-          <span class="text-sm text-slate-400 whitespace-nowrap">
+          <span class="text-xs text-slate-400 dark:text-slate-500 whitespace-nowrap sm:pt-0.5">
             {{ entry.period.from }} – {{ entry.period.to }}
           </span>
         </div>
-        <p class="mt-3 text-slate-500">{{ entry.summary }}</p>
+        <p class="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-400">{{ entry.summary }}</p>
+        <button
+          (click)="toggle(entry.id)"
+          class="mt-3 text-xs font-medium text-cyan-600 dark:text-cyan-400 hover:underline focus:outline-none"
+          [attr.aria-expanded]="expandedIds().has(entry.id)"
+        >
+          {{ expandedIds().has(entry.id) ? 'Hide details' : 'Show details' }}
+        </button>
+        <div class="expand-grid" [class.open]="expandedIds().has(entry.id)">
+          <div>
+            <ul class="mt-3 space-y-1.5 pt-1">
+              @for (bullet of entry.bullets; track bullet) {
+                <li class="text-xs leading-relaxed text-slate-500 dark:text-slate-400 pl-3 border-l border-slate-200 dark:border-slate-700">
+                  {{ bullet }}
+                </li>
+              }
+            </ul>
+          </div>
+        </div>
         <div class="mt-3 flex flex-wrap gap-2">
           @for (tech of entry.stack; track tech) {
-            <span class="text-xs px-2 py-1 bg-slate-100 rounded text-slate-600">{{ tech }}</span>
+            <span class="text-xs px-2 py-1 rounded border
+                         bg-slate-100 border-slate-200 text-slate-600
+                         dark:bg-slate-900 dark:border-slate-700 dark:text-slate-400">
+              {{ tech }}
+            </span>
           }
         </div>
       </li>

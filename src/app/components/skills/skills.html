@@ -1,14 +1,21 @@
-<section id="skills" class="max-w-4xl mx-auto px-6 py-16">
-  <h2 class="text-3xl font-bold text-slate-900 mb-10">Skills</h2>
+<section class="max-w-4xl mx-auto px-6 py-16">
+  <h2 class="text-2xl font-semibold tracking-tight text-slate-900 dark:text-slate-100 mb-10">
+    Skills
+  </h2>
   <div class="grid gap-8 sm:grid-cols-2">
     @for (group of groups; track group.category) {
-      <div>
-        <h3 class="text-sm font-semibold uppercase tracking-wider text-slate-400 mb-3">
+      <div appScrollReveal>
+        <h3 class="text-xs font-semibold uppercase tracking-widest mb-3
+                   text-cyan-600 dark:text-cyan-400">
           {{ group.category }}
         </h3>
         <div class="flex flex-wrap gap-2">
           @for (skill of group.skills; track skill) {
-            <span class="text-sm px-3 py-1 bg-slate-100 rounded-full text-slate-700">{{ skill }}</span>
+            <span class="text-sm px-3 py-1 rounded-md border
+                         bg-slate-100 border-slate-200 text-slate-700
+                         dark:bg-slate-900 dark:border-slate-700 dark:text-slate-300">
+              {{ skill }}
+            </span>
           }
         </div>
       </div>
