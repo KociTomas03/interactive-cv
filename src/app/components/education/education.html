@@ -1,0 +1,35 @@
+<section id="education" class="max-w-4xl mx-auto px-6 py-16">
+  <h2 class="text-3xl font-bold text-slate-900 mb-10">Education</h2>
+  <div class="grid gap-6 md:grid-cols-2">
+    @for (entry of entries; track entry.institution) {
+      <div class="border border-slate-200 rounded-lg p-6">
+        <div class="flex items-start justify-between gap-2">
+          <div>
+            @if (entry.url) {
+              <a [href]="entry.url" target="_blank" rel="noopener noreferrer"
+                 class="font-semibold text-slate-900 hover:underline underline-offset-4">{{ entry.institution }}</a>
+            } @else {
+              <p class="font-semibold text-slate-900">{{ entry.institution }}</p>
+            }
+            <p class="text-slate-600">{{ entry.degree }} {{ entry.field }}</p>
+            <p class="text-sm text-slate-400 mt-1">{{ entry.period.from }} – {{ entry.period.to }}</p>
+          </div>
+          @if (entry.status === 'in-progress') {
+            <span class="text-xs px-2 py-1 bg-amber-50 text-amber-700 rounded-full whitespace-nowrap">In progress</span>
+          }
+        </div>
+        @if (entry.thesis) {
+          <p class="mt-4 text-sm text-slate-500">
+            <span class="font-medium text-slate-700">Thesis:</span>
+            @if (entry.thesisUrl) {
+              <a [href]="entry.thesisUrl" target="_blank" rel="noopener noreferrer"
+                 class="hover:underline underline-offset-4"> {{ entry.thesis }}</a>
+            } @else {
+              {{ entry.thesis }}
+            }
+          </p>
+        }
+      </div>
+    }
+  </div>
+</section>
